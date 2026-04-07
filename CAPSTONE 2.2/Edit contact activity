@@ -1,0 +1,5 @@
+// Delete ke liye
+contactListController.deleteContact(contact, context);
+
+// Edit ke liye (EditCommand ko Controller ke through call karein)
+contactListController.editContact(contact, updated_contact, conte
