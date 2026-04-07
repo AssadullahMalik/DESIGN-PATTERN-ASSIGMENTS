@@ -1,0 +1,53 @@
+public class EditContactActivity extends AppCompatActivity {
+    private ContactList contact_list = new ContactList();
+    private Contact contact;
+    private EditText email;
+    private EditText username;
+    private Context context;
+    private String username_str;
+    private String email_str;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_edit_contact);
+        context = getApplicationContext();
+        contact_list.loadContacts(context);
+        Intent intent = getIntent();
+        int pos = intent.getIntExtra("position", 0);
+        contact = contact_list.getContact(pos);
+        username = (EditText) findViewById(R.id.username);
+        email = (EditText) findViewById(R.id.email);
+        username.setText(contact.getUsername());
+        email.setText(contact.getEmail());
+    }
+
+    public boolean validateInput() {
+        username_str = username.getText().toString();
+        email_str = email.getText().toString();
+
+        if (email_str.equals("")) {
+            email.setError("Empty field!");
+            return false;
+        }
+        if (!email_str.contains("@")) {
+            email.setError("Must be an email address!");
+            return false;
+        }
+        if (!contact_list.isUsernameAvailable(username_str) && !(contact.getUsername().equals(username_str))) {
+            username.setError("Username already taken!");
+            return false;
+        }
+        return true;
+    }
+
+    public void saveContact(View view) {
+        if (!validateInput()) {
+            return;
+        }
+        Contact updated_contact = new Contact(username_str, email_str, contact.getId());
+        EditContactCommand edit_contact_command = new EditContactCommand(contact_list, contact, updated_contact, context);
+        edit_contact_command.execute();
+        finish();
+    }
+}
