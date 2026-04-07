@@ -1,0 +1,7 @@
+// Edit ke liye:
+EditContactCommand editCommand = new EditContactCommand(contactList, oldContact, newContact, this);
+editCommand.execute();
+
+// Delete ke liye:
+DeleteContactCommand deleteCommand = new DeleteContactCommand(contactList, contact, this);
+deleteCommand.execute();
