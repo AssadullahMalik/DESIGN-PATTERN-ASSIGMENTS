@@ -1,0 +1,18 @@
+public class ContactListController {
+    private ContactList contact_list;
+
+    public ContactListController(ContactList contact_list) {
+        this.contact_list = contact_list;
+    }
+
+    public void addContact(Contact contact, Context context) {
+        AddContactCommand add_contact_command = new AddContactCommand(contact_list, contact, context);
+        add_contact_command.execute();
+    }
+
+    public void deleteContact(Contact contact, Context context) {
+        DeleteContactCommand delete_contact_command = new DeleteContactCommand(contact_list, contact, context);
+        delete_contact_command.execute();
+    }
+    // Is tarah baqi methods (load, save, etc.)
+}
