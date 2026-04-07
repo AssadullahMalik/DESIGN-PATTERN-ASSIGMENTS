@@ -1,0 +1,38 @@
+public class AddItemActivity extends AppCompatActivity {
+    private String title_str;
+    private String maker_str;
+    private String description_str;
+    private EditText title;
+    private EditText maker;
+    private EditText description;
+
+    // ... onCreate initializes EditTexts ...
+
+    public boolean validateInput() {
+        title_str = title.getText().toString();
+        maker_str = maker.getText().toString();
+        description_str = description.getText().toString();
+
+        if (title_str.equals("")) {
+            title.setError("Empty field!");
+            return false;
+        }
+        if (maker_str.equals("")) {
+            maker.setError("Empty field!");
+            return false;
+        }
+        if (description_str.equals("")) {
+            description.setError("Empty field!");
+            return false;
+        }
+        return true;
+    }
+
+    public void saveItem(View view) {
+        if (!validateInput()) {
+            return;
+        }
+        // Item banane aur save karne ka code yahan aayega
+        finish();
+    }
+}
