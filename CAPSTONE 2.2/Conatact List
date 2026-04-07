@@ -1,0 +1,49 @@
+package com.example.sharingapp;
+
+import android.content.Context;
+import java.util.ArrayList;
+
+public class ContactList extends Observable {
+    private ArrayList<Contact> contacts;
+
+    public ContactList() {
+        contacts = new ArrayList<Contact>();
+    }
+
+    public void setContacts(ArrayList<Contact> contact_list) {
+        this.contacts = contact_list;
+        notifyObservers();
+    }
+
+    public ArrayList<Contact> getContacts() { return contacts; }
+
+    public void addContact(Contact contact) {
+        contacts.add(contact);
+        notifyObservers();
+    }
+
+    public void deleteContact(Contact contact) {
+        contacts.remove(contact);
+        notifyObservers();
+    }
+
+    public Contact getContact(int index) { return contacts.get(index); }
+
+    public int getIndex(Contact contact) {
+        int pos = 0;
+        for (Contact c : contacts) {
+            if (c.getId().equals(contact.getId())) return pos;
+            pos++;
+        }
+        return -1;
+    }
+
+    public boolean isUsernameAvailable(String username) {
+        for (Contact c : contacts) {
+            if (c.getUsername().equals(username)) return false;
+        }
+        return true;
+    }
+    
+    // loadContacts aur saveContacts methods yahan aayenge...
+}
