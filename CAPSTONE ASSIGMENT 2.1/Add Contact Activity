@@ -1,0 +1,5 @@
+// Jab user save button dabaye:
+Contact newContact = new Contact(username, email, id);
+AddContactCommand addContactCommand = new AddContactCommand(contactList, newContact, this);
+addContactCommand.execute();
+finish(); // Activity band karne ke liye
