@@ -1,0 +1,9 @@
+// onCreate mein controller initialize karein
+contactListController = new ContactListController(contact_list);
+
+public void saveContact(View view) {
+    // Validations ke baad...
+    Contact new_contact = new Contact(username_str, email_str, null);
+    contactListController.addContact(new_contact, context);
+    finish();
+}
